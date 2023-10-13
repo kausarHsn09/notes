@@ -1,17 +1,24 @@
-import Header from "./components/Header";
-import Sidebar from "./components/Sidebar";
+import { Route, Routes, BrowserRouter,Navigate} from "react-router-dom";
 import Notes from "./components/Notes";
+import Reminders from "./components/Reminders";
+import Archives from "./components/Archives";
+import AppLayout from "./components/AppLayout";
 
 const App = () => {
   return (
-    <div className="min-h-screen overflow-hidden bg-grey ">
-      <Header />
-      <div className="w-full flex-row flex justify-center ">
-        <div className=" flex w-[1570px] h-[calc(100vh-100px)] bg-white rounded-[12px]">
-          <Sidebar />
-          <Notes />
-        </div>
-      </div>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<AppLayout />}>
+            <Route  path="notes" element={<Notes />}>
+              <Route path="reminders" element={<Reminders />} />
+              <Route path="archives" element={<Archives />} />
+            </Route>
+            <Route index element={<Navigate to="/notes" replace />} />
+          </Route>
+         
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 };
