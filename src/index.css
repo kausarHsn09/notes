@@ -43,3 +43,32 @@
 .note_Container{
    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06);
 }
+.note_creator_icons button{
+   font-size: 20px;
+   margin-right: 10px;
+   color: #808080;
+   cursor: pointer;
+}
+button {
+   position: relative;
+ }
+ 
+button[aria-label]:focus:after,
+button[aria-label]:hover:after {
+  position: absolute;
+  z-index: 1;
+  bottom: -3em;
+  left: 0em;
+  display: block;
+  overflow: hidden;
+  width: 8em;
+  height: 2em;
+  border-radius: .2em;
+  padding: 0 .7em;
+  content: attr(aria-label);
+  color: #fff;
+  background: #646262;
+  font-size: 12px;
+  line-height: 2em;
+  text-align: center;
+}
