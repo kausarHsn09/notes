@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,4 +7,39 @@
    padding: 0;
    margin: 0;
    box-sizing: border-box;
+}
+.sideBar-Container a{
+   display: inline-flex;
+   font-family: 'Inter';
+   margin-top: 20px;
+}
+.sideBar-Container a span{
+   font-size: 20px;
+   margin-right: 10px;
+   color: #C5C5C5;
+}
+.sideBar-Container a:focus{
+   color: #5144E0;
+}
+.sideBar-Container button{
+   display: inline-flex;
+   font-family: 'Inter';
+   margin-top: 20px;
+}
+.sideBar-Container button span{
+   font-size: 20px;
+   margin-right: 10px;
+   color: #C5C5C5;
+}
+.sideBar-Container button:focus{
+   color: #5144E0;
+}
+.sideBar-Container a:focus{
+   color: #5144E0;
+}
+.notes_creator{
+   box-shadow: 0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06);
+}
+.note_Container{
+   box-shadow: 0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06);
 }

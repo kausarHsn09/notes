@@ -13,6 +13,7 @@ const App = () => {
             <Route  path="notes" element={<Notes />}>
               <Route path="reminders" element={<Reminders />} />
               <Route path="archives" element={<Archives />} />
+              <Route path="label/:labelID" element={<Archives />} />
             </Route>
             <Route index element={<Navigate to="/notes" replace />} />
           </Route>
