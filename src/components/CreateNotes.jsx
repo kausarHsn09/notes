@@ -12,13 +12,14 @@ const CreateNotes = () => {
   
   const [ntitle, setnTitle] = useState("");
   const [ndescription, setnDescription] = useState("");
-  const [ntask, setnTask] = useState("");
+  
   const [nreminder, setnReminder] = useState(false);
   const [nachive, setnArchive] = useState(false);
-
+ 
   const [isCollapse, setIsCollapse] = useState(false);
   const [taskCollapse, setTaskCollapse] = useState(false);
   const Noteref = useRef(null);
+
   const addtaskRef = useRef(null);
 
   const dispatch = useDispatch();
@@ -44,9 +45,13 @@ const CreateNotes = () => {
       setTaskCollapse(false);
     }
   }
+   const ntask =[]
+    function handleTask(){
+      ntask.push(addtaskRef.current.value)
+    }
+    
 
   function handleSubmit(e) {
-
     const newNotes = {
     title : ntitle,
     description : ndescription,
@@ -54,17 +59,16 @@ const CreateNotes = () => {
     archive:nachive,
     task : ntask,
     }
-
     dispatch(addNotes(newNotes));
-
- 
     setnTitle("");
     setnDescription("");
-    setnTask("");
     setnReminder(false);
     setnArchive(false);
   }
 
+
+
+  
   return (
     <>
       {!isCollapse && (
@@ -101,14 +105,20 @@ const CreateNotes = () => {
 
               {taskCollapse && (
                 <div className="w-full ">
-                  <button className="text-[12px] text-black">
+                   {
+                    ntask.map((tsk)=>(
+                      <div>
+                      <input type="checkbox" />
+                      <p>{tsk}</p>
+                      </div>
+                    ))
+                   }
+                  <button onClick={handleTask} className="text-[12px] text-black">
                     <AiOutlinePlus />
                   </button>
                   <input
                     ref={addtaskRef}
                     name="task"
-                    value={ntask}
-                    onChange={(e) => setnTask(e.target.value)}
                     className="outline-none ml-2"
                     type="text"
                   />

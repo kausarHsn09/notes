@@ -1,14 +1,16 @@
-import React from 'react'
-
 const NoteItem = ({item}) => {
-  const {title,description,task} = item
+  const {title,description} = item
+  
+  const desWordCount =  description.split(" ")
+ 
+
   return (
     <div className="note_Container mt-4 px-4 py-5 bg-white w-[230px] h-auto rounded-2xl">
     <p className="font-semibold mt-2 text-[14px]	font-inter">
       {" "}
    {title}
     </p>
-    <h3 className="mt-2 font-medium text-left  text-[36px] leading-12 font-inter">
+    <h3 className={` ${desWordCount.length> 5 || description.length > 5 ? ` text-[22px]`:` text-[36px]`}  mt-2 font-medium text-left  leading-12 font-inter`}>
       {description}
     </h3>
 

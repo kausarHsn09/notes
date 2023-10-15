@@ -1,14 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const randomId =  Math.floor(Math.random()*200)
-
 const initialState = {
     note:[{
     title : '',
     description : '',
+    task : [],
     reminder: false,
     archive:false,
-    task : '',
     }]
 }
 
