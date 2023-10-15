@@ -1,35 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const randomId =  Math.floor(Math.random()*200)
+
 const initialState = {
+    note:[{
     title : '',
     description : '',
     reminder: false,
     archive:false,
     task : '',
+    }]
 }
 
 const noteSlice = createSlice({
     name:'note',
     initialState,
     reducers:{
-       title(state,action){
-        state.title = action.title
-       },
-       description(state,action){
-        state.description = action.description
-       },
-       task(state,action){
-        state.task = action.task
-       },
-       reminder(state,action){
-        state.reminder = action.payload
-       },
-       archive(state,action){
-        state.archive = action.payload
+       addNotes(state,action){
+        state.note.push(action.payload) 
        }
     }
 })
 
 
-export const { title ,description,task,reminder,archive } = noteSlice.actions 
+export const {addNotes } = noteSlice.actions 
 export default noteSlice.reducer
