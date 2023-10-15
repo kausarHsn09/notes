@@ -1,20 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { title,description,task,archive,reminder } from "./noteSlice";
+
 import { AiOutlineBell, AiOutlinePlus } from "react-icons/ai";
 import { BsPencilSquare } from "react-icons/bs";
 import { BiLabel } from "react-icons/bi";
 import { BsArchive } from "react-icons/bs";
 
 const CreateNotes = () => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [reminder, setReminder] = useState(false);
-  const [archive, setArchive] = useState(false);
-  const [addtask, setAddtask] = useState("");
-  const [changeLebel, setChangeLebel] = useState("");
-
   const [isCollapse, setIsCollapse] = useState(false);
   const [taskCollapse, setTaskCollapse] = useState(false);
   const Noteref = useRef(null);
+  const addtaskRef = useRef(null)
+  
+  const dispatch = useDispatch()
 
   useEffect(() => {
     window.addEventListener("click", outsideClick, true);
@@ -22,8 +21,14 @@ const CreateNotes = () => {
 
   function handleClick() {
     setIsCollapse(true);
-    
   }
+
+  useEffect(()=>{
+    if(taskCollapse){
+      addtaskRef.current.focus()
+    }
+  },[taskCollapse])
+
   function outsideClick(e) {
     const element = e.target;
     if (Noteref.current && !Noteref.current.contains(element)) {
@@ -31,10 +36,9 @@ const CreateNotes = () => {
       setTaskCollapse(false);
     }
   }
-
+ 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(title,description,reminder,archive,addtask)
   }
   
   return (
@@ -57,16 +61,14 @@ const CreateNotes = () => {
                 className="w-full outline-none font-inter font-semibold text-[14px]"
                 type="text"
                 placeholder="Title"
-                value={title}
-                onChange={(e)=> setTitle(e.target.value)}
+                onChange={(e)=>dispatch(title(e.target.value))}
               />
               <textarea
                 placeholder="Take note"
                 className="w-full font-inter  mt-4 outline-none text-[14px]"
                 cols="5"
                 rows="5"
-                value={description}
-                onChange={(e)=> setDescription(e.target.value)}
+                onChange={(e)=>dispatch(description(e.target.value))}
               ></textarea>
 
               {taskCollapse && (
@@ -75,14 +77,14 @@ const CreateNotes = () => {
                     <AiOutlinePlus />
                   </button>
                   <input 
-                  value={addtask}
-                  onChange={(e)=> setAddtask(e.target.value)}
+                  ref={addtaskRef}
+                  onChange={(e)=>dispatch(task(e.target.value))}
                   className="outline-none ml-2" type="text" />
                 </div>
               )}
               <div className="w-full flex justify-between items-center mt-2">
                 <div className="note_creator_icons flex flex-row justify-evenly items-center">
-                  <button onClick={()=>setReminder(true)} aria-label="Reminder">
+                  <button onClick={()=>dispatch(reminder(true))} aria-label="Reminder">
                     <AiOutlineBell />
                   </button>
                   <button
@@ -94,7 +96,7 @@ const CreateNotes = () => {
                   <button aria-label="Change label">
                     <BiLabel />
                   </button>
-                  <button onClick={()=>setArchive(true)} aria-label="Archive">
+                  <button onClick={()=>dispatch(archive(true))} aria-label="Archive">
                     <BsArchive />
                   </button>
                 </div>
