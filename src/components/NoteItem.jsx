@@ -1,7 +1,9 @@
+import {BsCheckCircle} from 'react-icons/bs'
+
 const NoteItem = ({item}) => {
-  const {title,description} = item
+  const {title,description,task} = item
   
-  const desWordCount =  description.split(" ")
+  const desWordCount = description.length > 0?  description.split(" ") : ''
  
 
   return (
@@ -14,10 +16,12 @@ const NoteItem = ({item}) => {
       {description}
     </h3>
 
-    <ul className="list-disc mt-3 list-inside	">
-      <li>First List </li>
-      <li>First List </li>
-      <li>First List </li>
+    <ul className="list-none mt-3 list-inside	">
+      {
+        task.map((todo)=>(
+          <li className='flex flex-row w-full justify-start items-center gap-2 '><BsCheckCircle className='text-blue'/>{todo}</li>
+        ))
+      }
     </ul>
 
     <div className="w-full flex flex-wrap justify-start mt-3">

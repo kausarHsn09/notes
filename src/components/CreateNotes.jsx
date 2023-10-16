@@ -9,17 +9,18 @@ import { BiLabel } from "react-icons/bi";
 import { BsArchive } from "react-icons/bs";
 
 const CreateNotes = () => {
-  
+
   const [ntitle, setnTitle] = useState("");
   const [ndescription, setnDescription] = useState("");
-  
+  const [listTask, setListTask] = useState([])
+  const [ntask, setNtask] = useState('')
   const [nreminder, setnReminder] = useState(false);
   const [nachive, setnArchive] = useState(false);
- 
   const [isCollapse, setIsCollapse] = useState(false);
   const [taskCollapse, setTaskCollapse] = useState(false);
-  const Noteref = useRef(null);
 
+
+  const Noteref = useRef(null);
   const addtaskRef = useRef(null);
 
   const dispatch = useDispatch();
@@ -45,19 +46,20 @@ const CreateNotes = () => {
       setTaskCollapse(false);
     }
   }
-   const ntask =[]
-    function handleTask(){
-      ntask.push(addtaskRef.current.value)
-    }
-    
+  function handleTask() {
+    setListTask([...listTask, ntask])
+    setNtask('')
+  }
+
+
 
   function handleSubmit(e) {
     const newNotes = {
-    title : ntitle,
-    description : ndescription,
-    reminder: nreminder,
-    archive:nachive,
-    task : ntask,
+      title: ntitle,
+      description: ndescription,
+      reminder: nreminder,
+      archive: nachive,
+      task: listTask
     }
     dispatch(addNotes(newNotes));
     setnTitle("");
@@ -66,9 +68,6 @@ const CreateNotes = () => {
     setnArchive(false);
   }
 
-
-
-  
   return (
     <>
       {!isCollapse && (
@@ -105,20 +104,21 @@ const CreateNotes = () => {
 
               {taskCollapse && (
                 <div className="w-full ">
-                   {
-                    ntask.map((tsk)=>(
-                      <div>
-                      <input type="checkbox" />
-                      <p>{tsk}</p>
-                      </div>
-                    ))
-                   }
+                  <ul>
+                    {
+                      listTask.map((todo) => (
+                        <li> <input type="checkbox" /> {todo}  </li>
+                      ))
+                    }
+                  </ul>
                   <button onClick={handleTask} className="text-[12px] text-black">
                     <AiOutlinePlus />
                   </button>
                   <input
                     ref={addtaskRef}
                     name="task"
+                    value={ntask}
+                    onChange={(e) => setNtask(e.target.value)}
                     className="outline-none ml-2"
                     type="text"
                   />
